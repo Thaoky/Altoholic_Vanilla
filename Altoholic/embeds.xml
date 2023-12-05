@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<Include file="libs\AceGUI-3.0\AceGUI-3.0.xml"/>
+<Include file="libs\AceConfig-3.0\AceConfig-3.0.xml"/>
+<Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
+<Script file="libs\LibDeflate\LibDeflate.lua"/>
+<Script file="libs\LibSerialize\LibSerialize.lua"/>
+
+<Include file="libs\LibBabble-Boss-3.0\lib.xml"/>
+
+<Include file="libs\LibMVC-1.0\LibMVC-1.0.xml"/>
+<Include file="libs\LibCraftInfo-1.0\LibCraftInfo-1.0.xml"/>
+<Include file="libs\LibCraftLevels-1.0\LibCraftLevels-1.0.xml"/>
+</Ui>
+
+

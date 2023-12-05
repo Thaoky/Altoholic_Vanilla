@@ -1,0 +1,52 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="MessageBox.lua"></Script>
+	
+	<Frame name="AltoMessageBox" toplevel="true" parent="UIParent" hidden="true" inherits="BackdropTemplate">
+		<Size x="323" y="100" />
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="-10" />
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString parentKey="Text" inherits="GameFontNormalSmall">
+					<Size x="300" y="28" />
+					<Anchors>
+						<Anchor point="TOP" x="10" y="-20" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+		</KeyValues>
+		<Frames>
+			<Button parentKey="ButtonYes" inherits="UIPanelButtonTemplate" text="YES">
+				<Size x="109" y="24" />
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" x="55" y="18" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						self:GetParent():Button_OnClick(1)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="ButtonNo" inherits="UIPanelButtonTemplate" text="NO">
+				<Size x="109" y="24" />
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.ButtonYes" relativePoint="RIGHT" x="0" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						self:GetParent():Button_OnClick(nil)
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad inherit="prepend">
+				Altoholic:BindViewToController(self, "AltoholicUI.MessageBox")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

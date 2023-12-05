@@ -1,0 +1,425 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- 
+	<Script file="Profiler.lua"></Script>
+	-->
+	<Script file="Tasks.lua"></Script>
+	<Script file="Helpers.lua"></Script>
+	<Script file="Comm.lua"></Script>
+	<Script file="Tooltip.lua"></Script>
+	<Script file="ItemFilters.lua"></Script>
+	<Script file="Loots.lua"></Script>
+	<Script file="Events.lua"></Script>
+	<Script file="Altoholic.lua"></Script>
+	
+	<GameTooltip name="AltoTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true" />
+
+	<GameTooltip name="AltoScanningTooltip" inherits="GameTooltipTemplate">
+		<Scripts>
+			<Onload>
+				self:SetOwner(WorldFrame, "ANCHOR_NONE")
+			</Onload>
+		</Scripts>
+	</GameTooltip>
+
+	<Frame name="AltoholicFrame" toplevel="true" parent="UIParent" movable="true" enableMouse="true" hidden="true">
+		<Size x="832" y="447" />
+		<Anchors>
+			<Anchor point="TOPLEFT" x="0" y="-104" />
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton")
+				self.elapsed = 0
+				PanelTemplates_SetNumTabs(self, 6)
+				PanelTemplates_SetTab(self, 1)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+				self.isMoving = true
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+				self.isMoving = false
+			</OnDragStop>
+			<OnShow>
+				Altoholic:OnShow()
+				PlaySound(1115)
+			</OnShow>
+			<OnHide>
+				PlaySound(1115)
+			</OnHide>
+		</Scripts>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentPortrait">
+					<Size x="58" y="58" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="12" y="-8" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentTopLeft" file="Interface\AuctionFrame\UI-AuctionFrame-Browse-TopLeft">
+					<Size x="256" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTop" file="Interface\AuctionFrame\UI-AuctionFrame-Browse-Top">
+					<Size x="320" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="256" y="0" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopRight" file="Interface\AuctionFrame\UI-AuctionFrame-Browse-TopRight">
+					<Size x="256" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentTop" relativePoint="TOPRIGHT" x="0" y="0" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBotLeft" file="Interface\AuctionFrame\UI-AuctionFrame-Browse-BotLeft">
+					<Size x="256" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="-256" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBot" file="Interface\AuctionFrame\UI-AuctionFrame-Auction-Bot">
+					<Size x="320" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="256" y="-256" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBotRight" file="Interface\AuctionFrame\UI-AuctionFrame-Bid-BotRight">
+					<Size x="256" y="256" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentBot" relativePoint="TOPRIGHT" x="0" y="0" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="260" y="18" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="320" y="-16" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentSearchLabel" inherits="GameFontNormalSmall">
+					<Size x="120" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="70" y="-35" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentTab1" inherits="AltoTabTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="15" y="11" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Summary" />
+				</KeyValues>
+			</Button>
+			<Button name="$parentTab2" inherits="AltoTabTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab1" relativePoint="TOPRIGHT" x="-8" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Characters" />
+				</KeyValues>
+			</Button>
+			<Button name="$parentTab3" inherits="AltoTabTemplate" id="3" text="SEARCH">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab2" relativePoint="TOPRIGHT" x="-8" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Search" />
+				</KeyValues>
+			</Button>
+			<Button name="$parentTab4" inherits="AltoTabTemplate" id="4" text="GUILD">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab3" relativePoint="TOPRIGHT" x="-8" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Guild" />
+				</KeyValues>
+			</Button>
+			<Button name="$parentTab5" inherits="AltoTabTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab4" relativePoint="TOPRIGHT" x="-8" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Agenda" />
+				</KeyValues>
+			</Button>
+			<Button name="$parentTab6" inherits="AltoTabTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab5" relativePoint="TOPRIGHT" x="-8" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="context" value="Grids" />
+				</KeyValues>
+			</Button>
+
+			<EditBox name="$parent_SearchEditBox" inherits="InputBoxTemplate">
+				<Size x="140" y="16" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentSearchLabel" relativePoint="BOTTOMLEFT" x="10" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetAutoFocus( false );
+					</OnLoad>
+					<OnEnterPressed>
+						Altoholic.Tabs:OnClick("Search")
+						Altoholic.Search:FindItem();
+						self:ClearFocus();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						Altoholic:ToggleUI()
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<Button name="$parent_ResetButton" inherits="UIPanelButtonTemplate">
+				<Size x="80" y="24" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_SearchEditBox" relativePoint="BOTTOMLEFT" x="-35" y="-7" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if IsAddOnLoaded("Altoholic_Search") then
+							Altoholic.Tabs.Search:Reset()
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_SearchButton" inherits="UIPanelButtonTemplate" text="SEARCH">
+				<Size x="80" y="24" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_ResetButton" relativePoint="RIGHT" x="20" y="5" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Altoholic.Tabs:OnClick("Search")
+						Altoholic.Search:FindItem();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="3" y="-8" />
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+	
+	<Frame name="AltoAccountSharing" toplevel="true" parent="UIParent" hidden="true">
+		<Size x="800" y="300" />
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="20" />
+		</Anchors>
+		<Frames>
+			<!-- 	for readability reasons, the scroll frame is in Frames/AccountSharing.xml	-->
+			
+			<Frame parentKey="Backdrop" setAllPoints="true" inherits="BackdropTemplate">
+				<Size x="800" y="300" />
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad inherit="prepend">
+						self:SetBackdrop({
+							bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+							edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+							tile = true,
+							tileSize = 32,
+							edgeSize = 32,
+							insets = { left = 11, right = 12, top = 12, bottom = 11, },
+						})
+					</OnLoad>
+				</Scripts>
+				<Layers>
+					<Layer>
+						<FontString name="$parentName" inherits="GameFontNormal" justifyH="CENTER">
+							<Size x="140" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" x="10" y="-16" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentText1" inherits="GameFontNormal" justifyH="LEFT">
+							<Size x="250" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="BOTTOMLEFT" x="10" y="-10" />
+							</Anchors>
+							<Color r="255" g="255" b="255" />
+						</FontString>
+						<FontString name="$parentText2" inherits="GameFontNormal" justifyH="CENTER">
+							<Size x="140" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" x="390" y="-16" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentText3" inherits="GameFontNormal" justifyH="CENTER">
+							<Size x="60" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentText2" relativePoint="TOPRIGHT" x="30" y="0" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentText4" inherits="GameFontNormal" justifyH="CENTER">
+							<Size x="60" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeTo="$parentText3" relativePoint="TOPRIGHT" x="30" y="0" />
+							</Anchors>
+						</FontString>
+						<FontString name="$parentTransferStatus" inherits="GameFontNormal" justifyH="CENTER">
+							<Size x="260" y="18" />
+							<Anchors>
+								<Anchor point="TOPLEFT" x="30" y="-170" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				
+				<Frames>
+					<EditBox name="$parent_AccNameEditBox" inherits="InputBoxTemplate">
+						<Size x="100" y="16" />
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentName" relativePoint="TOPRIGHT" x="10" y="0" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetAutoFocus(true)
+							</OnLoad>
+							<OnEnterPressed>
+								self:ClearFocus()
+								_G[self:GetParent():GetName() .."_AccTargetEditBox"]:SetFocus()
+							</OnEnterPressed>
+							<OnEscapePressed>
+								AltoAccountSharing:Hide()
+								Altoholic:ToggleUI()
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+					<Button name="$parent_InfoButton" inherits="UIPanelButtonTemplate" text="?">
+						<Size x="20" y="24" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_AccNameEditBox" relativePoint="RIGHT" x="5" y="0" />
+						</Anchors>
+						<Scripts>
+							<OnEnter>
+								Altoholic:ShowWidgetTooltip(self)
+							</OnEnter>
+							<OnLeave>
+								AltoTooltip:Hide();
+							</OnLeave>
+						</Scripts>
+					</Button>
+					
+					<CheckButton name="$parent_UseTarget" inherits="SendMailRadioButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentText1" relativePoint="BOTTOMLEFT" x="0" y="-10" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								_G[self:GetName().."Text"]:SetText(TARGET);
+								AltoAccountSharing_UseTarget:SetChecked(1)
+							</OnLoad>
+							<OnClick>
+								AltoAccountSharing_UseName:SetChecked(nil)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="$parent_UseName" inherits="SendMailRadioButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_UseTarget" relativePoint="BOTTOMLEFT" x="0" y="-10" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								AltoAccountSharing_UseName:SetChecked(nil)
+							</OnLoad>
+							<OnClick>
+								AltoAccountSharing_UseTarget:SetChecked(nil)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					
+					<EditBox name="$parent_AccTargetEditBox" inherits="InputBoxTemplate">
+						<Size x="140" y="16" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_UseNameText" relativePoint="RIGHT" x="30" y="0" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetAutoFocus( false );
+							</OnLoad>
+							<OnEnterPressed>
+								self:ClearFocus();
+							</OnEnterPressed>
+							<OnEscapePressed>
+								AltoAccountSharing:Hide()
+								Altoholic:ToggleUI()
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+					
+					<Button name="$parent_SendButton" inherits="UIPanelButtonTemplate">
+						<Size x="140" y="24" />
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="50" y="-130" />
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self.requestMode then
+									Altoholic.Comm.Sharing:GetContent()
+								else
+									Altoholic.Comm.Sharing:Request()
+								end
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parent_CancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+						<Size x="80" y="24" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="$parent_SendButton" relativePoint="RIGHT" x="20" y="0" />
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								AltoAccountSharing:Hide()
+								Altoholic:ToggleUI()
+							</OnClick>
+						</Scripts>
+					</Button>
+					
+					<Button name="$parent_ToggleAll">
+						<Size x="16" y="16" />
+						<Anchors>
+							<Anchor point="TOPLEFT" x="325" y="-20" />
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								Altoholic.Sharing.AvailableContent:ToggleAll(self, button)
+							</OnClick>
+						</Scripts>
+						<NormalTexture name="$parentIcon" file="Interface\Buttons\UI-MinusButton-UP" />
+						<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD" />
+					</Button>
+					<CheckButton name="$parent_CheckAll" inherits="UICheckButtonTemplate">
+						<Size x="20" y="20" />
+						<Anchors> 
+							<Anchor point="LEFT" relativeTo="$parent_ToggleAll" relativePoint="RIGHT" x="5" y="0" />
+						</Anchors>      
+						<Scripts>
+							<OnLoad>
+								_G[self:GetName() .. "Text"]:SetText(ALL)
+							</OnLoad>
+							<OnClick>
+								Altoholic.Sharing.AvailableContent:CheckAll(self, button)
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+				</Frames>
+			</Frame>			
+		</Frames>
+	</Frame>
+</Ui>

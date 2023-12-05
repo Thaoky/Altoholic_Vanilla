@@ -1,0 +1,357 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- Global -->
+	<Script file="ClassExtensions.lua"></Script>
+	<Script file="Frame.lua"></Script>
+
+	<Include file="AutoCastShine.xml"/>
+	<Include file="Button.xml"/>
+	<Include file="ItemIcon.xml"/>
+	<Include file="ClassIcon.xml"/>
+	<Include file="ClassIconsContainer.xml"/>
+	<Include file="SortButton.xml"/>
+	<Include file="SortButtonsContainer.xml"/>
+	<Include file="ScrollFrames.xml"/>
+	<Include file="ToggleButton.xml"/>
+	<Include file="DropDownMenu.xml"/>
+	<Include file="RealmPicker.xml"/>
+	
+	<Button name="AltoTabTemplate" inherits="CharacterFrameTabButtonTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				Altoholic.Tabs:OnClick(self:GetID());
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<!-- Template to simplify sizing & positioning of data panel frames -->
+	<Frame name="AltoDataPanelTemplate" hidden="true" virtual="true">
+		<Size x="607" y="306" />
+		<Anchors>
+			<Anchor point="TOPLEFT" x="190" y="-102" />
+		</Anchors>
+	</Frame>
+	
+	<!-- Simple item button template -->
+ 	<Button name="AltoItemButtonTemplate" inherits="AltoButtonTemplate" virtual="true">
+		<Layers>
+			<Layer level="ARTWORK" textureSubLevel="2">
+				<FontString parentKey="Count" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true" >
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-5" y="2" />
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="IconBorder" file="Interface\Buttons\UI-ActionButton-Border" hidden="true" alphaMode="ADD">
+					<Size x="67" y="67"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<NormalTexture parentKey="NormalTexture" file="Interface\Buttons\UI-Quickslot2" hidden="true">
+			<Size x="64" y="64" />
+			<Anchors>
+				<Anchor point="CENTER" x="0" y="-1" />
+			</Anchors>
+		</NormalTexture>
+		<Scripts>
+			<OnLoad>
+				Altoholic:SetClassExtensions(self, "AltoButton")
+			
+				self:SetIconSize(self.iconWidth, self.iconHeight)
+				self:SetIcon(self.iconFile)
+			
+				local level = self:GetParent():GetFrameLevel()
+				self:SetFrameLevel(level + 1)
+				self:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+			</OnLoad>
+			<OnEnter>
+				Altoholic:Item_OnEnter(self)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnClick>
+				Altoholic:Item_OnClick(self, button)
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Button name="AltoContainerTemplate" hidden="true" virtual="true">
+		<Size x="615" y="41" />
+		<Frames>
+			<!-- Reminder: these have a parentArray="Items" -->
+			<Button parentKey="Item1" inherits="AltoItemIconTemplate" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" x="17" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item2" inherits="AltoItemIconTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item1" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item3" inherits="AltoItemIconTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item2" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item4" inherits="AltoItemIconTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item3" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item5" inherits="AltoItemIconTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item4" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item6" inherits="AltoItemIconTemplate" id="6">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item5" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item7" inherits="AltoItemIconTemplate" id="7">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item6" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item8" inherits="AltoItemIconTemplate" id="8">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item7" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item9" inherits="AltoItemIconTemplate" id="9">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item8" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item10" inherits="AltoItemIconTemplate" id="10">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item9" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item11" inherits="AltoItemIconTemplate" id="11">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item10" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item12" inherits="AltoItemIconTemplate" id="12">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item11" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item13" inherits="AltoItemIconTemplate" id="13">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item12" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item14" inherits="AltoItemIconTemplate" id="14">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item13" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+		</Frames>
+	</Button>
+
+	<!-- Navigation -->
+	<Button name="AltoMenuItemTemplate" hidden="true" virtual="true">
+		<Size x="136" y="20" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Lines" file="Interface\AuctionFrame\UI-AuctionFrame-FilterLines">
+					<Size x="7" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" x="13" y="0" />
+					</Anchors>
+					<TexCoords left="0" right="0.4375" top="0" bottom="0.625"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<NormalTexture parentKey="NormalTexture" file="Interface\AuctionFrame\UI-AuctionFrame-FilterBg">
+			<TexCoords left="0" right="0.53125" top="0" bottom="0.625"/>
+		</NormalTexture>
+		<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD"/>
+		<ButtonText parentKey="Text">
+			<Size x="128" y="8" />
+			<Anchors>
+				<Anchor point="LEFT" x="4" y="0" />
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontNormalSmallLeft"/>
+		<HighlightFont style="GameFontHighlightSmallLeft"/>
+	</Button>
+
+	<Button name="AltoMenuNamedIconTemplate" virtual="true">
+		<Size x="136" y="40" />
+		<Layers>
+			<Layer level="BORDER">
+				<Texture file="Interface\Icons\INV_BannerPVP_02">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\AuctionFrame\UI-AuctionItemNameFrame">
+					<Size x="110" y="36"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="40" y="0"/>
+					</Anchors>
+					<TexCoords left="0.15625" right="0.83203125" top="0.171875" bottom="0.796875"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="GameFontNormal" justifyH="CENTER" text="Reputations">
+					<Size x="80" y="18" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="50" y="-9" />
+					</Anchors>
+					<Color r="1" g="1" b="1" /> 
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+
+	<!-- IconList, used by Pets & Achievements -->
+	<Button name="AltoIconListItemTemplate" hidden="true" virtual="true" inherits="BackdropTemplate">
+		<!-- <Size x="34" y="34" /> -->
+		<Size x="31" y="31" />
+		<Layers> 
+			<Layer level="BACKGROUND"> 
+				<Texture parentKey="Background">
+					<!-- <Size x="29" y="29" /> -->
+					<Size x="26" y="26" />
+					<Anchors>
+						<Anchor point="LEFT" x="2" y="0" />
+					</Anchors>
+					<Color r="0.2" g="0.2" b="0.2" a="1" /> 
+				</Texture> 
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="IconBorder" file="Interface\Buttons\UI-ActionButton-Border" alphaMode="ADD">
+					<Size x="67" y="67"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				<FontString parentKey="Name" inherits="GameFontNormalSmall" justifyH="CENTER" >
+					<Size x="30" y="18" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="5" y="0" />
+					</Anchors>
+					<Color r="1" g="1" b="1" /> 
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad inherit="prepend">
+				self:SetBackdrop({
+					bgFile = "Interface\\TutorialFrame\\TutorialFrameBackground",
+					edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+					tile = true,
+					tileSize = 30,
+					edgeSize = 8,
+					insets = { left = 5, right = 5, top = 5, bottom = 5, },
+				})
+				self:SetBackdropColor(1, 1, 1, 0)
+
+				local level = self:GetParent():GetFrameLevel()
+				self:SetFrameLevel(level + 1)
+				self:RegisterForClicks("LeftButtonDown", "RightButtonDown")
+			</OnLoad>
+			<OnLeave>
+				AltoTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+
+	<Button name="AltoIconListEntryTemplate" virtual="true">
+		<Size x="615" y="38" />
+		<Frames>
+			<Button parentKey="Name">
+				<Size x="160" y="37"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="0" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString parentKey="Text" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE">
+							<Size x="160" y="37"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="10" y="0" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button parentKey="Item1" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" x="180" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item2" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item1" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item3" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item2" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item4" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item3" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item5" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item4" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item6" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item5" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item7" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item6" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item8" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item7" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item9" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item8" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item10" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item9" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Item11" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item10" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+			<!-- New -->
+			<Button parentKey="Item12" inherits="AltoIconListItemTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Item11" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+			</Button>
+		</Frames>
+	</Button>
+	
+	<Frame name="AltoContextualMenuTemplate" inherits="AltoDropDownMenuTemplate" hidden="true" virtual="true">
+		<Size x="100" y="40" />
+	</Frame>
+	
+</Ui>

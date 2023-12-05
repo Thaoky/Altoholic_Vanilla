@@ -1,0 +1,171 @@
+Altoholic Classic Changelog (dates in dd/mm/yyyy)
+============================
+
+
+1.15.003 (26/11/2023)
+
+- DataStore_Crafts: The module is now shared between all versions of the game.
+- This concludes the conversion of all DataStore modules to make them compatible with all versions.
+
+1.15.002 (20/11/2023)
+
+- DataStore_Quests: The module is now shared between all versions of the game.
+- DataStore_Talents: The module is now shared between all versions of the game.
+- DataStore_Reputations: The module is now shared between all versions of the game.
+- The Quest Log icon now has the proper size.
+- Fixed a lua error when performing a search.
+- DataStore_Containers: Fixed COMMON_NUM_BAG_SLOTS to be NUM_BAG_SLOTS + 1 for retail, and NUM_BAG_SLOTS for non-retail, instead of the opposite.
+
+1.15.001 (17/11/2023)
+
+- ToC Update.
+
+1.14.007 (14/11/2023)
+
+- DataStore_Containers: The module is now shared between all versions of the game.
+
+1.14.006 (06/11/2023)
+
+- DataStore_Containers : fixed API calls to use C_Container. (Thanks Technohunter)
+- DataStore_Quests : updated ScanChoices and ScanRewardSpells to use the questID. (Thanks Technohunter)
+- DataStore_Mails : removed the classic specific checks when registering events. (Thanks Technohunter)
+- DataStore_Auctions is now generic and works will all versions of the game.
+- DataStore_Inventory is now generic and works will all versions of the game.
+
+1.14.005 (18/05/2023)
+
+- DataStore_Agenda is now generic and works will all versions of the game.
+
+1.14.004 (04/05/2023)
+
+- Updated Ace Libraries
+- Updated DataStore
+- Updated DataStore_Mails
+- Updated DataStore_Spells
+- Updated DataStore_Characters
+
+1.14.003 (05/06/2022)
+
+- Fixed item count not being visible in the tooltip for enchanting reagents.
+
+1.14.002 (23/11/2021)
+
+- Fixed the tooltip backdrop issue.
+(for reference: changed 2x BackdropTemplate to TooltipBackdropTemplate in Altoholic\Templates\DropDownMenu.xml)
+
+1.14.001 (03/10/2021)
+
+- Fixed 1.14 Backdrop related issues.
+
+1.13.011 (20/06/2021)
+
+- DataStore_Crafts : fixed the color of enchanting recipes in the skill panel, which were all displayed as orange.
+You must reload the profession once to fix the database entries.
+- Fixed the enchanting profession in the character's tab. Filtering by enchant name now also working.
+
+1.13.010 (19/05/2021)
+
+- Fixed a profession scanning issue where recipes of one profession could be stored into another profession.
+If you were affected by this, just reopen your professions once.
+
+1.13.009 (17/05/2021)
+
+- Removed the debug text displayed when opening a craft window. Sorry about this one.
+- Added tracking for raid encounter kills. Note that bosses killed were just saved in the previous version, but in an improper format.
+Be sure to reload alts with raid id's (it only affects the agenda tab, but you will get an error when mousing over raids of alts you have not reloaded).
+- Fixed a lua error when opening the "Beast Training" window.
+- [frFR] fixed problems related to "Secourisme/Premiers soins".
+- Fixed multiple minor issues related to professions.
+- Fixed searching profession recipes.
+
+1.13.008 (13/05/2021)
+
+- Fixed Enchanting
+- Summary Tab - Miscellaneous : Fixed guild info not properly reset when leaving a guild
+- Summary Tab - Added a faction filter for "this faction"
+- Fixed a Search issue related to the localized faction name. enUS & frFR clients were not affected, but most likely all other locales were.
+This is a proper fix to a bug I tried to fix earlier but only made worse :(
+Unfortunately, for some of you, reloading alts will be necessary. 
+Do not fully clean your SV files, but if you detect something fishy related to an alt's faction, just reload it.
+This issue may impact faction filtering in the account summary too. 
+
+1.13.007 (02/05/2021)
+
+- Fixed profession cooldowns not properly updating the agenda.
+- Fixed a localization issue in DataStore_Crafts that impacted non-enUS clients.
+
+1.13.006 (25/04/2021)
+
+- Fixed a Lua error in the date service, triggering a problem in the Agenda Tab.
+- DataStore_Talents : fixed an issue when scanning talents.
+- DataStore_Talents : fixed an issue checking the specialization of a low level alt.
+- Agenda Tab : fixed reporting of professions cooldowns, and some refresh issues.
+- Added tracking of the salt shaker cooldown.
+- Fixed multiple issues with account sharing, it should now work without problems.
+- Added support for LibDeflate, data transferred using the account sharing feature is now compressed, and the whole process is now much faster.
+Note that data transfer is still throttled, while the whole process will be 3-4 times faster than it was, it will never be lightning fast.
+
+Many thanks to Painstorm for his assistance :)
+
+1.13.005 (08/04/2021)
+
+- Fixed a Lua error when mousing over some recipes.
+- Fixed a Lua error in the event management.
+- Fixed professions cooldowns.
+- DataStore_Talents : fixed an issue that could cause account sharing not to work properly.
+- DataStore_Inventory : fixed a potential division by zero when scanning the inventory of a naked alt (Thanks qwarlocknew for finding this one !).
+- Fixed the recipe tooltips : the "already know by" information is now correct.
+
+Note that this relies on parsing the tooltip, and that it may occasionally fail.
+This is the fallback method that has been present in the add-on almost since the beginning, and for Classic, this is the best I can do until a recipe
+database is available (recipe x teaches item y, and it would still not be perfect since some items can be created by multiple professions !).
+The Classic API does not return the spell ID of a profession's specific item craft, and that makes it a real pain to make a proper unique match.
+
+While limited, this greatly improves the situation though.
+
+Also note that on Classic, I only have 2 low level alts (none is 60 yet), and I don't have all professions.. 
+so please report if you have a problem, and be very specific :)
+
+
+1.13.004 (28/03/2021)
+
+- Agenda Tab : Fixed a Lua error using C_Calendar.
+- The account sharing functionality has been reactivated. I could not test it extensively, please report if you have problems.
+- DataStore_Crafts : Added support for the localized profession names which may not be unique in some regions.
+
+1.13.003 (22/03/2021)
+
+- Summary Tab : fixed the tooltip of tradeskills, where the amount of recipes was improperly reported.
+- Search Tab : fixed a Lua error preventing all searches.
+
+1.13.002 (21/03/2021)
+
+Release Candidate - not released publically.
+
+- Summary Tab : added the miscellaneous menu item, as on retail.
+- Characters Tab : talent trees are now working.
+Note: Talent trees are working, but not finished. I intend to bring back the feature as I had implemented it in earlier retail versions, 
+where you could see a guildmate's talent tree from the interface. This will be back, hopefully soon, this is why you already have a second
+greyed out tree on the right of the panel.
+
+- Agenda Tab : is now working.
+- Grids Tab : Fixed a few Lua errors, and added missing icons for the reputations.
+- Grids Tab : added a panel for the raid attunements.
+- Grids Tab : added a panel for keys and key-like items (ex: Scepter of Celebras), with the dungeon to which they are related and the appropriate level.
+
+1.13.001 (9/02/2020)
+
+- Altoholic Summary : should be working fine, but limited to "account summary", "bags", "skills", "activity"
+- Altoholic Characters : should be working fine, except for the talents.
+- Altoholic Search : should be working fine
+- Altoholic Guild : should be working fine, but only contains the "guild" and not the "guild bank" since it did not exist in classic.
+- Altoholic Agenda : NOT WORKING, you should disable DataStore_Agenda.
+- Altoholic Grids : should be working fine, but limited to "Equipment", "Reputations", "Daily Quests", "Tradeskills"
+    Reputations used to get their icons from the related achievements, which do not exist in Classic, so icons are bad/missing.
+
+- DataStore_Achievements + Currencies + Garrisons + Pets : not supported at all in Classic
+ (and thus not part of this package)
+- DataStore_Agenda + Stats + Talents : are provided as-is, they need to be adapted for Classic, they should be DISABLED in the addon list.
+- Other DataStore modules : should be working fine.
+
+- Added the sell price of items in the tooltip, and an option to show/hide it.
