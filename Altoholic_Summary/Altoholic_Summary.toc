@@ -1,0 +1,22 @@
+## Interface: 11500
+## Title: Altoholic_Summary
+## Notes: Altoholic's Summary Tab
+## Author: Thaoky (EU-Marécages de Zangar)
+## Version: 1.15.003
+## Dependencies: Altoholic, DataStore, DataStore_Characters
+## LoadOnDemand: 1
+## X-Category: Interface Enhancements
+
+Templates\UITemplates.xml
+TabSummary.xml
+Characters.lua
+
+AccountSummary.xml
+
+Data\Suggestions_enUS.lua
+Data\Suggestions_deDE.lua
+Data\Suggestions_frFR.lua
+Data\Suggestions_koKR.lua
+Data\Suggestions_ruRU.lua
+Data\Suggestions_zhCN.lua
+Data\Suggestions_zhTW.lua

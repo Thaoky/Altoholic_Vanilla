@@ -1,0 +1,13 @@
+## Interface: 11500
+## Title: Altoholic_Guild
+## Notes: Altoholic's Guild UI
+## Author: Thaoky (EU-Marécages de Zangar)
+## Version: 1.15.003
+## Dependencies: Altoholic, DataStore, DataStore_Characters
+## LoadOnDemand: 1
+## X-Category: Interface Enhancements
+
+Templates\UITemplates.xml
+TabGuild.xml
+
+Frames\GuildMembers.xml

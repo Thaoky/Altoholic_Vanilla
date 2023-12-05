@@ -1,0 +1,169 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Search.lua"></Script>
+
+	<Button name="AltoSearchEntryTemplate" hidden="true" virtual="true">
+		<Size x="615" y="41" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString parentKey="Name" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="240" y="14" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="53" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat1" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="160" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="TOPRIGHT" x="5" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat2" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="150" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat1" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat3" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="50" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat2" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat4" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="50" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat3" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat5" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="50" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat4" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Stat6" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="50" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat5" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="ILvl" inherits="GameFontNormal" justifyH="CENTER">
+					<Size x="50" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Stat6" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Cooldown parentKey="Cooldown" inherits="CooldownFrameTemplate"/>
+			<Button parentKey="Item" inherits="AltoItemIconTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="10" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Source">
+				<Size x="220" y="10" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="BOTTOMLEFT" x="0" y="0" />
+				</Anchors>
+				<ButtonText parentKey="Text" justifyH="LEFT">
+					<Size x="210" y="10" />
+					<Anchors>
+						<Anchor point="LEFT" x="0" y="0" />
+					</Anchors>
+				</ButtonText>
+				<Scripts>
+					<OnEnter>
+						local id = self:GetID()
+						if id == 0 then return end
+						
+						local link
+						local result = Altoholic.Search:GetResult(id)
+						
+						if result.linetype == 3 then
+							local isEnchanting = (result.professionName == GetSpellInfo(7411))
+							
+							if isEnchanting then
+								link = Altoholic:GetRecipeLink(result.spellID, result.professionName)
+							end
+						elseif result.linetype == 4 then
+							local LTL = LibStub("LibTradeLinks-1.0")
+							link = Altoholic:GetRecipeLink(result.spellID, LTL:GetSkillName(result.skillID))
+						end
+
+						if link then
+							GameTooltip:ClearLines();
+							GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+							GameTooltip:SetHyperlink(link);
+							GameTooltip:AddLine(" ",1,1,1);
+							GameTooltip:Show();
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						if ( button == "LeftButton" ) and ( IsShiftKeyDown() ) then
+							local chat = ChatEdit_GetLastActiveWindow()
+							if chat:IsShown() then
+								local id = self:GetID()
+								if id == 0 then return end
+								
+								local link
+								local result = Altoholic.Search:GetResult(id)
+								
+								if result.linetype == 3 then
+									link = Altoholic:GetRecipeLink(result.spellID, result.professionName)
+								elseif result.linetype == 4 then
+									local LTL = LibStub("LibTradeLinks-1.0")
+									link = Altoholic:GetRecipeLink(result.spellID, LTL:GetSkillName(result.skillID))
+								end
+								
+								if not link then return end
+								chat:Insert(link)
+							end
+						end
+					</OnClick>
+				</Scripts>
+				<NormalFont style="GameFontNormalSmallLeft"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				local level = self:GetParent():GetFrameLevel()
+				self:SetFrameLevel(level + 1)
+			</OnLoad>
+		</Scripts>
+		<HighlightTexture name="$parentHighlight" file="Interface\HelpFrame\HelpFrameButton-Highlight" alphaMode="ADD">
+			<Size x="555" y="37" />
+			<Anchors>
+				<Anchor point="TOPLEFT" x="55" y="0" />
+			</Anchors>
+			<TexCoords left="0" right="1.0" top="0" bottom="0.578125"/>
+		</HighlightTexture>
+	</Button>
+
+	<Frame name="AltoholicFrameSearch" parent="AltoholicTabSearch" hidden="true">
+		<Size x="615" y="306" />
+		<Anchors>
+			<Anchor point="TOPRIGHT" x="39" y="-105" />
+		</Anchors>
+		<Frames>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate">
+				<Scripts>
+					<OnVerticalScroll>
+						self:OnVerticalScroll(offset, 41, Altoholic.Search.Update)
+					</OnVerticalScroll>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="7" type="number" />
+					<KeyValue key="rowHeight" value="41" type="number" />
+					<KeyValue key="rowTemplate" value="AltoSearchEntryTemplate" />
+					<KeyValue key="xOffset" value="0" type="number" />
+					<KeyValue key="yOffset" value="-5" type="number" />
+				</KeyValues>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+</Ui>

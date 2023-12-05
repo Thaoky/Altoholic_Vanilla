@@ -1,0 +1,141 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TabGrids.lua"></Script>
+	
+	<Button name="AltoTabGridsClassIconTemplate" inherits="AltoClassIconTemplate" virtual="true">
+		<KeyValues>
+			<KeyValue key="optionFormat" value="Tabs.Grids.%s.%s.Column%d" />
+		</KeyValues>
+		<Scripts>
+			<OnEnter>
+				self:Icon_OnEnter()
+			</OnEnter>
+		</Scripts>
+	</Button>
+	
+	<Frame name="AltoholicTabGrids" parent="AltoholicFrame" hidden="true">
+		<Size x="758" y="447" />
+		<Anchors>
+			<Anchor point="TOPLEFT" />
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Label1" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size x="100" y="18" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="35" y="-105" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="TextView" inherits="GameFontNormalSmall" justifyH="LEFT" text="GUILD_ROSTER_VIEW" hidden="true">
+					<Size x="60" y="18" />
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="AltoholicFrameSearchLabel" relativePoint="RIGHT" x="60" y="-5" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="Status" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="320" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-250" y="13" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame parentKey="SelectView" inherits="AltoDropDownMenuTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.TextView" relativePoint="BOTTOMLEFT" x="-30" y="-2"/>
+				</Anchors>
+			</Frame>
+			<Frame parentKey="SelectRealm" inherits="AltoRealmPickerTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Label1" relativePoint="BOTTOMLEFT" x="-25" y="-2" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="menuWidth" value="120" type="number" />
+				</KeyValues>
+			</Frame>
+				
+			<!-- Menu Icons -->
+			<Frame parentKey="ClassIcons" inherits="AltoClassIconsContainerTemplate">
+				<KeyValues>
+					<KeyValue key="numIcons" value="12" type="number" />
+					<KeyValue key="iconTemplate" value="AltoTabGridsClassIconTemplate" />
+					<KeyValue key="tabName" value="Grids" />
+				</KeyValues>
+			</Frame>
+		
+			<Frame parentKey="ContextualMenu" inherits="AltoContextualMenuTemplate" />
+			
+			<Button parentKey="Equipment" inherits="AltoTabGridsMenuIconTemplate" id="1">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="AltoholicTabGrids" relativePoint="BOTTOMLEFT" x="30" y="240" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\INV_Chest_Plate04" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="Factions" inherits="AltoTabGridsMenuIconTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Equipment" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\INV_BannerPVP_02" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="Dailies" inherits="AltoTabGridsMenuIconTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Factions" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\LFGFrame\LFGIcon-Quest" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="TradeSkills" inherits="AltoTabGridsMenuIconTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Dailies" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\Ability_Repair" />
+					<KeyValue key="text" value="TRADESKILLS" type="global" />
+				</KeyValues>
+			</Button>
+			
+			<Button parentKey="Attunements" inherits="AltoTabGridsMenuIconTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="AltoholicTabGrids" relativePoint="BOTTOMLEFT" x="30" y="200" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\inv_misc_head_dragon_01" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="Keys" inherits="AltoTabGridsMenuIconTemplate" id="6">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent.Attunements" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\inv_misc_key_11" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="Dungeons" inherits="AltoTabGridsMenuIconTemplate" id="7" hidden="true">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="AltoholicTabGrids" relativePoint="BOTTOMLEFT" x="30" y="200" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\inv_helmet_189" />
+					<KeyValue key="text" value="LOOKING_FOR_DUNGEON" type="global" />
+				</KeyValues>
+			</Button>
+			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TabGrids")
+			</OnLoad>
+			<OnShow>
+				self:UpdateMenuIcons()
+				self:Update()
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

@@ -1,0 +1,39 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TabGridsMenuIcon.lua"></Script>
+	
+ 	<Button name="AltoTabGridsMenuIconTemplate" inherits="AltoButtonTemplate" virtual="true">
+		<Size x="30" y="30" />
+		<Frames>
+			<Frame parentKey="Shine" inherits="AltoAutoCastShineTemplate">
+				<Size x="28" y="28" />
+				<Anchors>
+					<Anchor point="CENTER" x="0" y="0" />
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TabGridsMenuIcon", "AltoholicUI.Button")
+			</OnLoad>
+			<OnEnter>
+				if self.text then
+					AltoTooltip:ClearLines()
+					AltoTooltip:SetOwner(self, "ANCHOR_RIGHT")
+					AltoTooltip:AddLine(self.text,1,1,1)
+					AltoTooltip:Show()
+				end
+			</OnEnter>
+			<OnLeave>
+				AltoTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				self:StopAutoCastShine()
+				self:StartAutoCastShine()
+				
+				local parent = self:GetParent()
+				parent:InitializeGrid(self:GetID())
+				parent:Update()
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>

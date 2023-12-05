@@ -1,0 +1,220 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TabSummary.lua"></Script>
+	
+	<Frame name="AltoholicTabSummary" parent="AltoholicFrame">
+		<Size x="758" y="447" />
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Totals" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="60" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset x="-180" y="13" />
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="TotalLv" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="80" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset x="-100" y="13" />
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="TotalGold" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="80" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset x="-20" y="13" />
+						</Anchor>
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="TotalPlayed" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="80" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset x="60" y="13" />
+						</Anchor>
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="MenuItem1" inherits="AltoTabSummaryMenuItemTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="23" y="-105" />
+				</Anchors>
+			</Button>
+			<Button parentKey="MenuItem2" inherits="AltoTabSummaryMenuItemTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.MenuItem1" relativePoint="BOTTOMLEFT" x="0" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="MenuItem3" inherits="AltoTabSummaryMenuItemTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.MenuItem2" relativePoint="BOTTOMLEFT" x="0" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="MenuItem4" inherits="AltoTabSummaryMenuItemTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.MenuItem3" relativePoint="BOTTOMLEFT" x="0" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="MenuItem5" inherits="AltoTabSummaryMenuItemTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.MenuItem4" relativePoint="BOTTOMLEFT" x="0" y="0" />
+				</Anchors>
+			</Button>
+			
+			<Button parentKey="RealmsIcon" inherits="AltoTabSummaryIconTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="300" y="-40" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_GuildPerk_Everyones a Hero_rank2.tga" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="FactionIcon" inherits="AltoTabSummaryIconTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.RealmsIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_BG_winWSG.tga" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="LevelIcon" inherits="AltoTabSummaryIconTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.FactionIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_Level_60.tga" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="ProfessionsIcon" inherits="AltoTabSummaryIconTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.LevelIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_GuildPerk_WorkingOvertime.tga" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="ClassIcon" inherits="AltoTabSummaryIconTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.ProfessionsIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_Character_Gnome_Female.tga" />
+				</KeyValues>
+			</Button>
+			<Button parentKey="DataStoreOptionsIcon" inherits="AltoTabSummaryIconTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeKey="$parent" relativePoint="TOPRIGHT" x="25" y="-40" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\INV_Misc_Book_11" />
+				</KeyValues>
+				<Scripts>
+					<OnClick>
+						Altoholic:ToggleUI()
+						InterfaceOptionsFrame_OpenToCategory("DataStore")
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button parentKey="AltoholicOptionsIcon" inherits="AltoTabSummaryIconTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeKey="$parent.DataStoreOptionsIcon" relativePoint="TOPLEFT" x="-5" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Icons\Trade_Engineering" />
+				</KeyValues>
+				<Scripts>
+					<OnClick>
+						Altoholic:ToggleUI()
+						InterfaceOptionsFrame_OpenToCategory("Altoholic")
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Button parentKey="RequestSharing" inherits="AltoButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeKey="$parent.AltoholicOptionsIcon" relativePoint="TOPLEFT" x="-15" y="0" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_Reputation_01.tga" />
+				</KeyValues>
+				<Scripts>
+					<OnEnter>
+						Altoholic.Tabs.Summary:AccountSharingButton_OnEnter(self)
+					</OnEnter>
+					<OnLeave>
+						AltoTooltip:Hide()
+					</OnLeave>
+					<OnClick>
+						Altoholic.Tabs.Summary:AccountSharingButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<Frame parentKey="SortButtons" inherits="AltoSortButtonsContainerTemplate">
+				<KeyValues>
+					<KeyValue key="numButtons" value="9" type="number" />
+					<KeyValue key="option" value="UI.Tabs.Summary.SortAscending" />
+				</KeyValues>
+			</Frame>
+			
+			<Button parentKey="ToggleView" inherits="AltoToggleButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AltoholicFrameSearchLabel" relativePoint="TOPRIGHT" x="40" y="-15" />
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString parentKey="CollapseAllText" inherits="GameFontNormalSmall" justifyH="LEFT" text="ALL">
+							<Size x="60" y="20" />
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPRIGHT" x="4" y="2" />
+							</Anchors>
+							<Color r="255" g="255" b="255" />
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						self:Toggle()
+						Altoholic.Characters:ToggleView(self)
+						Altoholic.Summary:Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Frame parentKey="ContextualMenu" inherits="AltoContextualMenuTemplate" />
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				local L = LibStub("AceLocale-3.0"):GetLocale("Altoholic")
+				
+				self.MenuItem1:SetText(L["Account Summary"])
+				self.MenuItem2:SetText(L["Bag Usage"])
+				self.MenuItem3:SetText(SKILLS)
+				self.MenuItem4:SetText(L["Activity"])
+				self.MenuItem5:SetText(MISCELLANEOUS)
+				
+				self.RequestSharing:SetText(L["Account Sharing"])
+				
+				self.ClassIcon:SetIcon(Altoholic:GetCharacterIcon())
+			</OnLoad>
+			<OnShow>
+				if Altoholic.Summary then
+					Altoholic.Summary:Update()
+				end
+			</OnShow>
+			<OnHide>
+				self.ContextualMenu:Close()
+			</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

@@ -1,0 +1,152 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TabSearch.lua"></Script>
+	
+	<Frame name="AltoholicTabSearch" parent="AltoholicFrame" hidden="true">
+		<Size x="758" y="447" />
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="LevelRange" inherits="GameFontNormalSmall" text="LEVEL_RANGE">
+					<Size x="70" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="AltoholicFrameSearchLabel" relativePoint="RIGHT" x="33" y="0" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="Rarity" inherits="GameFontNormalSmall" text="RARITY">
+					<Size x="90" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.LevelRange" relativePoint="RIGHT" x="10" y="0" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="Slot" inherits="GameFontNormalSmall">
+					<Size x="100" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Rarity" relativePoint="RIGHT" x="40" y="0" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="Location" inherits="GameFontNormalSmall">
+					<Size x="100" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Slot" relativePoint="RIGHT" x="20" y="0" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+				<FontString parentKey="Status" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="320" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-250" y="13" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoMenuScrollFrameTemplate">
+				<Scripts>
+					<OnVerticalScroll>
+						self:OnVerticalScroll(offset, 20, Altoholic.Tabs.Search.Update)
+					</OnVerticalScroll>
+					<OnShow>
+						Altoholic.Tabs.Search:Update()
+					</OnShow>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="15" type="number" />
+					<KeyValue key="rowHeight" value="20" type="number" />
+					<KeyValue key="rowTemplate" value="AltoMenuItemTemplate" />
+					<KeyValue key="xOffset" value="23" type="number" />
+					<KeyValue key="yOffset" value="-105" type="number" />
+				</KeyValues>
+			</ScrollFrame>
+			
+			<EditBox parentKey="MinLevel" letters="3" numeric="true" autoFocus="false" inherits="InputBoxTemplate">
+				<Size x="25" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AltoholicFrame_SearchEditBox" relativePoint="RIGHT" x="10" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						self:ClearFocus();
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+			<EditBox parentKey="MaxLevel" letters="3" numeric="true" autoFocus="false" inherits="InputBoxTemplate">
+				<Size x="25" y="16" />
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.MinLevel" relativePoint="RIGHT" x="12" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnEnterPressed>
+						self:ClearFocus();
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+			<Frame parentKey="SelectRarity" name="$parent_SelectRarity" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.MaxLevel" relativePoint="RIGHT" x="0" y="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_SetWidth(self, 100) 
+						UIDropDownMenu_SetButtonWidth(self, 20)
+						Altoholic:DDM_Initialize(self, Altoholic.Tabs.Search.DropDownRarity_Initialize)
+						UIDropDownMenu_SetSelectedValue(self, 0);
+						UIDropDownMenu_SetText(self, ITEM_QUALITY_COLORS[0].hex .. _G["ITEM_QUALITY0_DESC"])
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame parentKey="SelectSlot" name="$parent_SelectSlot" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.MaxLevel" relativePoint="RIGHT" x="130" y="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = LibStub("AceLocale-3.0"):GetLocale("Altoholic")
+						
+						UIDropDownMenu_SetWidth(self, 80) 
+						UIDropDownMenu_SetButtonWidth(self, 20)
+						Altoholic:DDM_Initialize(self, Altoholic.Tabs.Search.DropDownSlot_Initialize)
+						UIDropDownMenu_SetSelectedValue(self, 0);
+						UIDropDownMenu_SetText(self, L["Any"])
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame parentKey="SelectLocation" name="$parent_SelectLocation" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.MaxLevel" relativePoint="RIGHT" x="250" y="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = LibStub("AceLocale-3.0"):GetLocale("Altoholic")
+						
+						UIDropDownMenu_SetWidth(self, 150) 
+						UIDropDownMenu_SetButtonWidth(self, 20)
+						Altoholic:DDM_Initialize(self, Altoholic.Tabs.Search.DropDownLocation_Initialize)
+						UIDropDownMenu_SetSelectedValue(self, 2);
+						UIDropDownMenu_SetText(self, format("%s %s(%s)", L["This realm"], "|cFF00FF00", L["This faction"]))
+					</OnLoad>
+				</Scripts>
+			</Frame>		
+			
+			<Frame parentKey="SortButtons" inherits="AltoSortButtonsContainerTemplate">
+				<KeyValues>
+					<KeyValue key="numButtons" value="8" type="number" />
+					<KeyValue key="option" value="UI.Tabs.Search.SortAscending" />
+				</KeyValues>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic.Tabs.Search:OnLoad()
+			</OnLoad>
+			<OnShow>
+				Altoholic.Tabs.Search:Update()
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

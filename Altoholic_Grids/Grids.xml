@@ -1,0 +1,36 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Grid_Attunements.lua"></Script>
+	<Script file="Grid_Equipment.lua"></Script>
+	<Script file="Grid_Keys.lua"></Script>
+	<Script file="Grid_Reputations.lua"></Script>
+	<Script file="Grid_Tradeskills.lua"></Script>
+	<Script file="Grid_Dailies.lua"></Script>
+	<Script file="Grid_Dungeons.lua"></Script>
+	
+	<Frame name="AltoholicFrameGrids" parent="AltoholicTabGrids" hidden="true">
+		<Size x="615" y="306" />
+		<Anchors>
+			<Anchor point="TOPRIGHT" x="39" y="-105" />
+		</Anchors>
+		<Frames>
+			<Frame name="$parentRightClickMenu" inherits="UIDropDownMenuTemplate" id="1" hidden="true">
+				<Size x="100" y="40" />
+			</Frame>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate">
+				<Scripts>
+					<OnVerticalScroll>
+						local parent = self:GetParent():GetParent()
+						self:OnVerticalScroll(offset, 41, parent.Update, parent)
+					</OnVerticalScroll>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="8" type="number" />
+					<KeyValue key="rowHeight" value="41" type="number" />
+					<KeyValue key="rowTemplate" value="AltoIconListEntryTemplate" />
+					<KeyValue key="xOffset" value="3" type="number" />
+					<KeyValue key="yOffset" value="3" type="number" />
+				</KeyValues>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+</Ui>

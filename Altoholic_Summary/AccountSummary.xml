@@ -1,0 +1,30 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="AccountSummary.lua"></Script>
+
+	<Frame name="AltoholicFrameSummary" parent="AltoholicTabSummary">
+		<Size>
+			<AbsDimension x="615" y="306"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="39" y="-105"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate">
+				<Scripts>
+					<OnVerticalScroll>
+						self:OnVerticalScroll(offset, 18, Altoholic.Summary.Update)
+					</OnVerticalScroll>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="14" type="number" />
+					<KeyValue key="rowHeight" value="18" type="number" />
+					<KeyValue key="rowTemplate" value="AltoSummaryPaneRowTemplate" />
+				</KeyValues>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+</Ui>
