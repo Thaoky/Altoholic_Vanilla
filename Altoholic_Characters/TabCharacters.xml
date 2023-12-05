@@ -1,0 +1,119 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TabCharacters.lua"></Script>
+
+	<Button name="AltoTabCharactersIconTemplate" inherits="AltoButtonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				Altoholic.Tabs.Characters:Icon_OnEnter(self)
+			</OnEnter>
+		</Scripts>
+	</Button>
+	
+	<Frame name="AltoholicTabCharacters" parent="AltoholicFrame" hidden="true">
+		<Size x="758" y="447" />
+		<Anchors>
+			<Anchor point="TOPLEFT" x="0" y="0" />
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Status" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="600" y="24" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="190" y="13" />
+					</Anchors>
+					<Color r="255" g="255" b="255" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Menu Icons -->
+			<Frame parentKey="MenuIcons" name="AltoholicTabCharacters_MenuIcons">
+				<Size x="340" y="37" />
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="AltoholicFrameSearchLabel" relativePoint="RIGHT" x="60" y="-15" />
+				</Anchors>
+				<Frames>
+					<Button parentKey="CharactersIcon" inherits="AltoTabCharactersIconTemplate" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT" />
+						</Anchors>
+					</Button>
+					<Button parentKey="BagsIcon" inherits="AltoTabCharactersIconTemplate" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.CharactersIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+					</Button>
+					<Button parentKey="QuestsIcon" inherits="AltoTabCharactersIconTemplate" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.BagsIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\LFGFrame\LFGIcon-Quest" />
+						</KeyValues>
+					</Button>
+					<Button parentKey="TalentsIcon" inherits="AltoTabCharactersIconTemplate" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.QuestsIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Spell_Nature_NatureGuardian.tga" />
+						</KeyValues>
+					</Button>
+					<Button parentKey="AuctionIcon" inherits="AltoTabCharactersIconTemplate" id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.TalentsIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\Icons\INV_Misc_Coin_01" />
+						</KeyValues>
+					</Button>
+					<Button parentKey="MailIcon" inherits="AltoTabCharactersIconTemplate" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.AuctionIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\Icons\INV_Misc_Note_01" />
+						</KeyValues>
+					</Button>
+					<Button parentKey="SpellbookIcon" inherits="AltoTabCharactersIconTemplate" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.MailIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\Icons\INV_Misc_Book_09" />
+						</KeyValues>
+					</Button>
+					<Button parentKey="ProfessionsIcon" inherits="AltoTabCharactersIconTemplate" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeKey="$parent.SpellbookIcon" relativePoint="TOPRIGHT" x="5" y="0" />
+						</Anchors>
+						<KeyValues>
+							<KeyValue key="iconFile" value="Interface\Addons\Altoholic_Summary\Textures\Achievement_GuildPerk_WorkingOvertime.tga" />
+						</KeyValues>
+					</Button>
+				</Frames>
+			</Frame>
+	
+			<Frame parentKey="ContextualMenu" inherits="AltoContextualMenuTemplate" />
+			
+			<Frame parentKey="SortButtons" inherits="AltoSortButtonsContainerTemplate">
+				<KeyValues>
+					<KeyValue key="numButtons" value="4" type="number" />
+					<KeyValue key="option" value="UI.Tabs.Characters.SortAscending" />
+				</KeyValues>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic.Tabs.Characters:OnLoad()
+			</OnLoad>
+			<OnShow>
+				Altoholic.Tabs.Characters:OnShow()
+			</OnShow>
+			<OnHide>
+				DropDownList1:Hide()
+			</OnHide>
+		</Scripts>
+	</Frame>
+	
+</Ui>

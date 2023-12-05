@@ -1,0 +1,203 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TalentSpecialization.lua"></Script>
+	
+	<!-- 
+		These 2 templates are copies of Blizzard's templates, necessary here because if Altoholic's talent panel is opened
+		before WoW's talent panel, then the templates are not yet known..
+	-->
+	<Texture name="AltoTalentBranchTemplate" file="Interface\TalentFrame\UI-TalentBranches" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+	</Texture>
+	
+	<Texture name="AltoTalentArrowTemplate" file="Interface\TalentFrame\UI-TalentArrows" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+	</Texture>
+	
+	<!-- Template for one talent specialization (7 rows / 4 columns) -->
+ 	<Frame name="AltoTalentSpecializationTemplate" virtual="true">
+		<Size x="218" y="306"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="TopLeft">
+					<Size>
+						<AbsDimension x="174" y="232"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="TopRight">
+					<Size>
+						<AbsDimension x="44" y="232"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopLeft" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="BottomLeft">
+					<Size>
+						<AbsDimension x="174" y="116"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopLeft" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="BottomRight">
+					<Size>
+						<AbsDimension x="44" y="116"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.TopLeft" relativePoint="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>		
+		
+		<Frames>
+			<Frame parentKey="Tree">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="3" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="200" y="304"/>
+				</Size>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="Branch1" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch2" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch3" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch4" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch5" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch6" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch7" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch8" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch9" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch10" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch11" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch12" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch13" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch14" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch15" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch16" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch17" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch18" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch19" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch20" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch21" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch22" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch23" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch24" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch25" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch26" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch27" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch28" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch29" inherits="AltoTalentBranchTemplate"/>
+						<Texture parentKey="Branch30" inherits="AltoTalentBranchTemplate"/>
+					</Layer>
+				</Layers>
+				<Frames>
+					<Button parentKey="Talent1" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent2" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent3" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent4" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent5" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent6" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent7" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent8" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent9" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent10" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent11" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent12" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent13" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent14" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent15" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent16" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent17" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent18" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent19" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent20" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent21" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent22" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent23" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent24" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent25" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent26" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent27" inherits="AltoTalentButtonTemplate" />
+					<Button parentKey="Talent28" inherits="AltoTalentButtonTemplate" />
+
+					<Frame parentKey="ArrowsFrame" setAllPoints="true">
+						<Layers>
+							<Layer level="OVERLAY">
+								<Texture parentKey="Arrow1" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow2" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow3" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow4" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow5" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow6" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow7" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow8" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow9" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow10" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow11" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow12" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow13" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow14" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow15" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow16" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow17" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow18" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow19" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow20" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow21" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow22" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow23" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow24" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow25" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow26" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow27" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow28" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow29" inherits="AltoTalentArrowTemplate"/>
+								<Texture parentKey="Arrow30" inherits="AltoTalentArrowTemplate"/>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+			</Frame>		
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TalentSpecialization")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

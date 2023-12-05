@@ -1,0 +1,113 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Mails.lua"></Script>
+
+	<Button name="AltoMailEntryTemplate" virtual="true">
+		<Size x="615" y="41" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="220" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="53" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentCharacter" inherits="GameFontNormal">
+					<Size x="130" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentName" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString name="$parentExpiry" inherits="GameFontNormal">
+					<Size x="200" y="32" />
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentCharacter" relativePoint="BOTTOMRIGHT" x="5" y="0" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentItem" inherits="AltoItemIconTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="10" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						Altoholic.Mail:OnEnter(self)
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						Altoholic.Mail:OnClick(self, button)
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<HighlightTexture name="$parentHighlight" file="Interface\HelpFrame\HelpFrameButton-Highlight" alphaMode="ADD">
+			<Size x="560" y="37" />
+			<Anchors>
+				<Anchor point="TOPLEFT" x="50" y="0" />
+			</Anchors>
+			<TexCoords left="0" right="1.0" top="0" bottom="0.578125"/>
+		</HighlightTexture>
+	</Button>
+
+	<Frame name="AltoholicFrameMail" parent="AltoholicTabCharacters" hidden="true">
+		<Size x="615" y="306" />
+		<Anchors>
+			<Anchor point="TOPRIGHT" x="39" y="-105" />
+		</Anchors>
+		<Frames>
+			<ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate" hidden="true">
+				<Scripts>
+					<OnVerticalScroll>
+						self:OnVerticalScroll(offset, 41, Altoholic.Mail.Update)
+					</OnVerticalScroll>
+				</Scripts>
+				<!--
+				<KeyValues>
+					<KeyValue key="numRows" value="7" type="number" />
+					<KeyValue key="rowTemplate" value="AltoMailEntryTemplate" />
+				</KeyValues>
+				-->
+			</ScrollFrame>
+			
+			<Button name="$parentEntry1" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentScrollFrame" relativePoint="TOPLEFT" x="0" y="0" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry2" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry1" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry3" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry2" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry4" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry3" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry5" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry4" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry6" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry5" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+			<Button name="$parentEntry7" inherits="AltoMailEntryTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentEntry6" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+	
+</Ui>

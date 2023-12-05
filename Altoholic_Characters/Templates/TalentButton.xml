@@ -1,0 +1,46 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="TalentButton.lua"></Script>
+	
+	<!-- Button for one talent -->
+	<Button name="AltoTalentButtonTemplate" virtual="true">
+		<Size x="32" y="32" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Icon">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="CENTER" x="-1" y="2"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<FontString parentKey="Count" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-5" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TalentButton", "AltoholicUI.Button")
+			</OnLoad>
+			<OnEnter>
+				if not self.talentName then return end
+				
+				AltoTooltip:ClearLines()
+				AltoTooltip:SetOwner(self, "ANCHOR_RIGHT")
+				AltoTooltip:AddLine(self.talentName, 1, 1, 1)
+				AltoTooltip:AddLine(format("%s %d/%d", RANK, self.rank, self.maxRank), 1, 1, 1)
+				AltoTooltip:Show()
+			</OnEnter> 
+			<OnLeave>
+				AltoTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+</Ui>

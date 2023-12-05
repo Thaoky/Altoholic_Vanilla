@@ -1,0 +1,86 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="SpellButton.lua"></Script>
+	
+	<Texture name="Spellbook-SlotFrame" file="Interface\Spellbook\Spellbook-Parts" virtual="true" >
+		<Size x="70" y="65"/>
+		<TexCoords left="0.00390625" right="0.27734375" top="0.44140625" bottom="0.69531250"/>
+	</Texture>
+	<Texture name="Spellbook-TextBackground" file="Interface\Spellbook\Spellbook-Parts" virtual="true" >
+		<Size x="167" y="39"/>
+		<TexCoords left="0.31250000" right="0.96484375" top="0.37109375" bottom="0.52343750"/>
+	</Texture>
+	<Texture name="Spellbook-EmptySlot" file="Interface\Spellbook\Spellbook-Parts" virtual="true" >
+		<Size x="43" y="43"/>
+		<TexCoords left="0.79296875" right="0.96093750" top="0.00390625" bottom="0.17187500"/>
+	</Texture>
+	
+	<!-- Button for one talent -->
+	<Button name="AltoSpellButtonTemplate" virtual="true">
+		<Size x="37" y="37" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Background" inherits="Spellbook-EmptySlot">
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="TextBackground" inherits="Spellbook-TextBackground">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Background" relativePoint="TOPRIGHT" x="-4" y="-5"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture parentKey="Icon" setAllPoints="true" hidden="true"/>
+				<FontString parentKey="SpellName" inherits="GameFontNormal" maxLines="3" hidden="true" justifyH="LEFT">
+					<Size x="145" y="0" />
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" x="8" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="SubSpellName" inherits="SubSpellFont" hidden="true" justifyH="LEFT">
+					<Size x="145" y="18" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.SpellName" relativePoint="BOTTOMLEFT" x="0" y="2" />
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="-1">
+				<Texture parentKey="Slot" inherits="Spellbook-SlotFrame">
+					<Anchors>
+						<Anchor point="CENTER" x="1.5"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.SpellButton", "AltoholicUI.Button")
+			</OnLoad>
+			<OnEnter>
+				if self.spellID then 
+					AltoTooltip:SetOwner(self, "ANCHOR_LEFT")
+					AltoTooltip:ClearLines()
+					AltoTooltip:SetHyperlink("spell:" .. self.spellID)
+					AltoTooltip:Show()
+				end
+			</OnEnter>
+			<OnLeave>
+				AltoTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				if button ~= "LeftButton" or not IsShiftKeyDown() or not self.spellID then return end
+				
+				local chat = ChatEdit_GetLastActiveWindow()
+				if not chat:IsShown() then return end
+				
+				local link = GetSpellLink(self.spellID)
+				
+				if link then
+					chat:Insert(link)
+				end
+			</OnClick>
+		</Scripts>
+		<HighlightTexture parentKey="Highlight" file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+	</Button>
+</Ui>

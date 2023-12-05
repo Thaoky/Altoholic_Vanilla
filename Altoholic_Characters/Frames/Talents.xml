@@ -1,0 +1,162 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Talents.lua"></Script>
+	
+ 	<Button name="AltoTalentIconTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="30" y="30"/>
+		</Size>
+		<Layers>
+			<Layer level="BORDER">
+				<Texture parentKey="Icon"/>
+				<FontString parentKey="Count" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="-5" y="2"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<!-- 
+		<Frames>
+			<Frame parentKey="Shine" inherits="AutoCastShineTemplate">
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="28" y="28"/>
+				</Size>
+			</Frame>
+		</Frames>
+		-->
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TalentIcon")
+			</OnLoad>
+			<OnEnter>
+				self:Icon_OnEnter()
+			</OnEnter>
+			<OnLeave>
+				AltoTooltip:Hide()
+			</OnLeave>
+			<OnClick>
+				self:Icon_OnClick(button)
+			</OnClick>
+		</Scripts>
+		<PushedTexture file="Interface\Buttons\UI-Quickslot-Depress"/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+	</Button>
+	
+	<Frame name="AltoTreeIconsTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="200" y="50"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Text" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size x="200" y="18" />
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="0" y="10" />
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="SpecIcon1" inherits="AltoTalentIconTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="0" y="-15" />
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button parentKey="SpecIcon2" inherits="AltoTalentIconTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.SpecIcon1" relativePoint="TOPRIGHT" >
+						<Offset x="5" y="0" />
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button parentKey="SpecIcon3" inherits="AltoTalentIconTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.SpecIcon2" relativePoint="TOPRIGHT" >
+						<Offset x="5" y="0" />
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Frame>	
+	
+	
+	<Frame parentKey="Talents" parent="AltoholicTabCharacters" inherits="AltoDataPanelTemplate">
+		<Frames>
+			<!-- Tree 1 : left pane, is the player pane -->
+			<Frame parentKey="PlayerSpec" inherits="AltoTalentSpecializationTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="-5" />
+				</Anchors>
+			</Frame>
+			
+			<!-- Tree 2 : right pane, is the guild pane -->
+			<Frame parentKey="GuildSpec" inherits="AltoTalentSpecializationTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="420" y="-5"/>
+				</Anchors>
+			</Frame>
+
+			<!-- Between both panes -->
+			<Frame parentKey="Icons1" inherits="AltoTreeIconsTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="215" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<!-- 
+			<Frame parentKey="Icons2" inherits="AltoTreeIconsTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="225" y="-70"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			-->
+			<Frame parentKey="Icons3" inherits="AltoTreeIconsTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="215" y="-180"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<!-- 
+			<Frame parentKey="Icons4" inherits="AltoTreeIconsTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="225" y="-245"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			-->
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.TalentPanel")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

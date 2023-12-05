@@ -1,0 +1,26 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Quests.lua"></Script>
+	
+	<Frame parentKey="QuestLog" parent="AltoholicTabCharacters" inherits="AltoDataPanelTemplate">
+		<Frames>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate">
+				<Scripts>
+					<OnVerticalScroll>
+						local parent = self:GetParent()
+						self:OnVerticalScroll(offset, 43, parent.Update, parent)
+					</OnVerticalScroll>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="7" type="number" />
+					<KeyValue key="rowHeight" value="43" type="number" />
+					<KeyValue key="rowTemplate" value="AltoQuestLogRowTemplate" />
+				</KeyValues>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				Altoholic:BindViewToController(self, "AltoholicUI.QuestLog")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
