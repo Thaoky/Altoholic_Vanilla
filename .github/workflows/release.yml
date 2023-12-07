@@ -28,7 +28,8 @@ jobs:
       - name: Copy subfolders from DataStore repositories
         run: |
           git clone https://github.com/Thaoky/DataStore.git temp
-          cp -r temp/DataStore/* .
+          mv temp/DataStore .
+          rm -rf temp
 
       # Runs a single command using the runners shell
       - name: Generate Zip file
