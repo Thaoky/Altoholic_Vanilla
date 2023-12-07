@@ -19,6 +19,7 @@ jobs:
       CURSEFORGE_API_TOKEN: ${{ secrets.CURSEFORGE_API_TOKEN }}
       DISPLAY_NAME: ""
       ZIP_FILE_NAME: ""
+      ADDON_VERSION: ""
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,11 +32,17 @@ jobs:
           mv temp/DataStore .
           rm -rf temp
 
+      - name: Extract Version
+        run: |
+          ADDON_VERSION=$(grep -oP "## Version: \K[^ ]+" Altoholic/Altoholic.toc)
+          echo "Version found: $ADDON_VERSION"
+          echo "ADDON_VERSION=$ADDON_VERSION" >> $GITHUB_ENV
+
       # Runs a single command using the runners shell
       - name: Generate Zip file
         run: |
           # Combine date and value to form the zip file name
-          DISPLAY_NAME="${{ vars.CURSEFORGE_DISPLAY_NAME }} $(date '+%Y.%m.%d')" 
+          DISPLAY_NAME="${{ vars.CURSEFORGE_DISPLAY_NAME }} v$ADDON_VERSION" 
           ZIP_FILE_NAME="$DISPLAY_NAME.zip"
 
           # Get the content of linked submodules before zipping
