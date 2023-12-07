@@ -29,7 +29,30 @@ jobs:
       - name: Copy subfolders from DataStore repositories
         run: |
           git clone https://github.com/Thaoky/DataStore.git temp
+          git clone https://github.com/Thaoky/DataStore_Agenda.git temp
+          git clone https://github.com/Thaoky/DataStore_Auctions.git temp
+          git clone https://github.com/Thaoky/DataStore_Characters.git temp
+          git clone https://github.com/Thaoky/DataStore_Containers.git temp
+          git clone https://github.com/Thaoky/DataStore_Crafts.git temp
+          git clone https://github.com/Thaoky/DataStore_Inventory.git temp
+          git clone https://github.com/Thaoky/DataStore_Mails.git temp
+          git clone https://github.com/Thaoky/DataStore_Quests.git temp
+          git clone https://github.com/Thaoky/DataStore_Reputations.git temp
+          git clone https://github.com/Thaoky/DataStore_Spells.git temp
+          git clone https://github.com/Thaoky/DataStore_Talents.git temp
+          
           mv temp/DataStore .
+          mv temp/DataStore_Agenda .
+          mv temp/DataStore_Auctions .
+          mv temp/DataStore_Characters .
+          mv temp/DataStore_Containers .
+          mv temp/DataStore_Crafts .
+          mv temp/DataStore_Inventory .
+          mv temp/DataStore_Mails .
+          mv temp/DataStore_Quests .
+          mv temp/DataStore_Reputations .
+          mv temp/DataStore_Spells .
+          mv temp/DataStore_Talents .
           rm -rf temp
 
       - name: Extract Version
