@@ -2,6 +2,11 @@ Altoholic Classic Changelog (dates in dd/mm/yyyy)
 ============================
 
 
+1.15.004 (07/12/2023)
+
+- First release via Github.
+- ToC Update.
+
 1.15.003 (26/11/2023)
 
 - DataStore_Crafts: The module is now shared between all versions of the game.
