@@ -29,32 +29,53 @@ jobs:
       - name: Copy subfolders from DataStore repositories
         run: |
           git clone https://github.com/Thaoky/DataStore.git temp
-          git clone https://github.com/Thaoky/DataStore_Agenda.git temp
-          git clone https://github.com/Thaoky/DataStore_Auctions.git temp
-          git clone https://github.com/Thaoky/DataStore_Characters.git temp
-          git clone https://github.com/Thaoky/DataStore_Containers.git temp
-          git clone https://github.com/Thaoky/DataStore_Crafts.git temp
-          git clone https://github.com/Thaoky/DataStore_Inventory.git temp
-          git clone https://github.com/Thaoky/DataStore_Mails.git temp
-          git clone https://github.com/Thaoky/DataStore_Quests.git temp
-          git clone https://github.com/Thaoky/DataStore_Reputations.git temp
-          git clone https://github.com/Thaoky/DataStore_Spells.git temp
-          git clone https://github.com/Thaoky/DataStore_Talents.git temp
-          
           mv temp/DataStore .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Agenda.git temp
           mv temp/DataStore_Agenda .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Auctions.git temp
           mv temp/DataStore_Auctions .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Characters.git temp
           mv temp/DataStore_Characters .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Containers.git temp
           mv temp/DataStore_Containers .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Crafts.git temp
           mv temp/DataStore_Crafts .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Inventory.git temp
           mv temp/DataStore_Inventory .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Mails.git temp
           mv temp/DataStore_Mails .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Quests.git temp
           mv temp/DataStore_Quests .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Reputations.git temp
           mv temp/DataStore_Reputations .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Spells.git temp
           mv temp/DataStore_Spells .
+          rm -rf temp
+          
+          git clone https://github.com/Thaoky/DataStore_Talents.git temp
           mv temp/DataStore_Talents .
           rm -rf temp
-
+          
       - name: Extract Version
         run: |
           ADDON_VERSION=$(grep -oP "## Version: \K[^ ]+" Altoholic/Altoholic.toc)
