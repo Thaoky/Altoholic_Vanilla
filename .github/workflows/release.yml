@@ -78,7 +78,7 @@ jobs:
           
       - name: Extract Version
         run: |
-          ADDON_VERSION=$(grep -oP "## Version: \K[^ ]+" Altoholic/Altoholic.toc)
+          ADDON_VERSION=$(grep -oP "## Version: \K[^\r ]+" Altoholic/Altoholic.toc)
           echo "Version found: $ADDON_VERSION"
           echo "ADDON_VERSION=$ADDON_VERSION" >> $GITHUB_ENV
 
