@@ -89,8 +89,6 @@ jobs:
           DISPLAY_NAME="${{ vars.CURSEFORGE_DISPLAY_NAME }} v$ADDON_VERSION" 
           ZIP_FILE_NAME="$DISPLAY_NAME.zip"
 
-          # Get the content of linked submodules before zipping
-          git submodule update --init --recursive
           zip -r -9 "$ZIP_FILE_NAME" * -x README.md
           echo "File name: $ZIP_FILE_NAME"
 
@@ -98,12 +96,4 @@ jobs:
           echo "DISPLAY_NAME=$DISPLAY_NAME" >> $GITHUB_ENV
           echo "ZIP_FILE_NAME=$ZIP_FILE_NAME" >> $GITHUB_ENV
 
-      - name: Upload to Curseforge API
-        run: |
-          API_URL="https://wow.curseforge.com/api/projects/${{ vars.CURSEFORGE_PROJECT_ID }}/upload-file"
-          
-          curl -L -X POST \
-          -H "x-api-token: ${{ secrets.CURSEFORGE_API_TOKEN }}" \
-          -F "metadata={\"displayName\": \"$DISPLAY_NAME\", \"gameVersions\": [ ${{ vars.CURSEFORGE_GAME_VERSIONS }}], \"releaseType\": \"release\", \"changelog\": \"See changelog.txt\"}"  \
-          -F "file=@$ZIP_FILE_NAME" \
-          "$API_URL"
+
