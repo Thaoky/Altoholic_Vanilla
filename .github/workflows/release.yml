@@ -96,4 +96,13 @@ jobs:
           echo "DISPLAY_NAME=$DISPLAY_NAME" >> $GITHUB_ENV
           echo "ZIP_FILE_NAME=$ZIP_FILE_NAME" >> $GITHUB_ENV
 
+      - name: Upload to Curseforge API
+        run: |
+          API_URL="https://wow.curseforge.com/api/projects/${{ vars.CURSEFORGE_PROJECT_ID }}/upload-file"
+          
+          curl -L -X POST \
+          -H "x-api-token: ${{ secrets.CURSEFORGE_API_TOKEN }}" \
+          -F "metadata={\"displayName\": \"$DISPLAY_NAME\", \"gameVersions\": [ ${{ vars.CURSEFORGE_GAME_VERSIONS }}], \"releaseType\": \"release\", \"changelog\": \"See changelog.txt\"}"  \
+          -F "file=@$ZIP_FILE_NAME" \
+          "$API_URL"
 
