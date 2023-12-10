@@ -2,7 +2,7 @@
 ## Title: Altoholic_Agenda
 ## Notes: Altoholic's Agenda UI
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 1.15.004
+## Version: 1.15.005
 ## Dependencies: Altoholic, DataStore, DataStore_Agenda, DataStore_Characters
 ## LoadOnDemand: 1
 ## X-Category: Interface Enhancements
