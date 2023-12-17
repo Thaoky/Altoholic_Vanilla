@@ -2,6 +2,11 @@ Altoholic Classic Changelog (dates in dd/mm/yyyy)
 ============================
 
 
+1.15.006 (17/12/2023)
+
+- DataStore_Quests: Reworked the tracking of campaign progress. 
+- DataStore_Currencies: added Legion Veiled Argunite.
+
 1.15.005 (10/12/2023)
 
 - DataStore_Containers: Fixed Bag5 being treated as the reagent bag in non-retail, causing the proper count not to be displayed for the first bank bag.
