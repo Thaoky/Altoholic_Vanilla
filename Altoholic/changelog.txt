@@ -2,6 +2,10 @@ Altoholic Classic Changelog (dates in dd/mm/yyyy)
 ============================
 
 
+1.15.007 (29/12/2023)
+
+- Align with DataStore updates.
+
 1.15.006 (17/12/2023)
 
 - DataStore_Quests: Reworked the tracking of campaign progress. 
